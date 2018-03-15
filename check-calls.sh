@@ -9,7 +9,7 @@ STATE=`echo "$TEXT" | tail -n1 | sed -e "s/Call 1 State://g"`
 echo "$STATE"
 if [[ $STATE == 'Ringing' ]]; then
         echo "$STATE $LAST_PHONE"
-        mosquitto_pub -h $BROKER  -t $ENDPOINT/last -m $LAST_PHONE -r
+        mosquitto_pub -h $BROKER  -t "$ENDPOINT/last" -m "$LAST_PHONE" -r
 fi
-mosquitto_pub -h $BROKER -t $ENDPOINT/status -m $STATE -r
+mosquitto_pub -h $BROKER -t "$ENDPOINT/status" -m "$STATE" -r
 
