@@ -7,7 +7,7 @@ TEXT=`curl --silent $PAP |grep -oP '(Call 1 State|Last Caller Number):<td><font 
 LAST_PHONE=`echo "$TEXT" | head -n1 | sed -e "s/Last Caller Number://g"`
 STATE=`echo "$TEXT" | tail -n1 | sed -e "s/Call 1 State://g"`
 echo "$STATE"
-if [ $STATE == 'Ringing' ]; then
+if [[ $STATE == 'Ringing' ]]; then
         echo "$STATE $LAST_PHONE"
         mosquitto_pub -h $BROKER  -t $ENDPOINT/last -m $LAST_PHONE -r
 fi
